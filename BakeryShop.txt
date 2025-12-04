@@ -1,0 +1,17 @@
+use BakeryShop
+switched to db BakeryShop
+db.Orders.insertOne({customerName: "Alice Johnson",
+item: "Chocolate Cake",
+quantity: 2,
+totalPrice: 500})
+{
+  acknowledged: true,
+  insertedId: ObjectId('693173993aa090623d19e2e2')
+}
+show collections
+Orders
+db.Orders.drop()
+true
+db.dropDatabase()
+{ ok: 1, dropped: 'BakeryShop' }
+BakeryShop
