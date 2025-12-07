@@ -1,0 +1,69 @@
+use EventTracker
+switched to db EventTracker
+db.UpcomingEvents.insertOne({name:"music Fest",date:new Date(),isFreeEntry:false,ticketPrice:299.99,performers:["DJ MAx","Live Band"],location:{city:"chennai",venue:"Beach"},specialCode:null})
+{
+  acknowledged: true,
+  insertedId: ObjectId('6932ce14ac8aee53084cb152')
+}
+db.UpcomingEvents.insertMany([{name:"Arts Fest",date:new Date(),isFreeEntry:false,ticketPrice:199.99,performers:["picasso","arts"],location:{city:"chennai",venue:"Beach"},specialCode:null},{name:"Dance Fest",date:new Date(),isFreeEntry:false,ticketPrice:599.45,performers:["DJ X","hip hop"],location:{city:"chennai",venue:"Beach"},specialCode:null}])
+{
+  acknowledged: true,
+  insertedIds: {
+    '0': ObjectId('693568efb2946c03fc1b5ffc'),
+    '1': ObjectId('693568efb2946c03fc1b5ffd')
+  }
+}
+show collections
+UpcomingEvents
+db.UpcomingEvents.find()
+{
+  _id: ObjectId('6932ce14ac8aee53084cb152'),
+  name: 'music Fest',
+  date: 2025-12-05T12:20:36.830Z,
+  isFreeEntry: false,
+  ticketPrice: 299.99,
+  performers: [
+    'DJ MAx',
+    'Live Band'
+  ],
+  location: {
+    city: 'chennai',
+    venue: 'Beach'
+  },
+  specialCode: null
+}
+{
+  _id: ObjectId('69356a7e71e75c70fd2af155'),
+  name: 'Arts Fest',
+  date: 2025-12-07T11:52:30.297Z,
+  isFreeEntry: false,
+  ticketPrice: 199.99,
+  performers: [
+    'picasso',
+    'arts'
+  ],
+  location: {
+    city: 'chennai',
+    venue: 'Beach'
+  },
+  specialCode: null
+}
+{
+  _id: ObjectId('69356a7e71e75c70fd2af156'),
+  name: 'Dance Fest',
+  date: 2025-12-07T11:52:30.297Z,
+  isFreeEntry: false,
+  ticketPrice: 599.45,
+  performers: [
+    'DJ X',
+    'hip hop'
+  ],
+  location: {
+    city: 'chennai',
+    venue: 'Beach'
+  },
+  specialCode: null
+}
+EventTracker
+
+

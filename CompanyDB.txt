@@ -1,0 +1,145 @@
+use CompanyDB
+switched to db CompanyDB
+db.Employees.insertOne({
+    name: "Ravi Kumar",
+    age: 28,
+    isActive: true,
+    salary: 45000.50,
+    skills: ["JavaScript", "Node.js", "MongoDB"],
+    contact: {
+        email: "ravi@example.com",
+        phone: "9876543210"
+    },
+    joinedDate: new Date(),
+    managerAssigned: null
+})
+{
+  acknowledged: true,
+  insertedId: ObjectId('69356b88ab2a140b7119e21c')
+}
+db.Employees.insertMany([
+    {
+        name: "Anita Sharma",
+        age: 32,
+        isActive: false,
+        salary: 52000,
+        skills: ["Python", "Django"],
+        contact: { email: "anita@example.com", phone: "9123456780" },
+        joinedDate: new Date("2023-04-10"),
+        managerAssigned: "Ravi Kumar",
+        projects: 5,
+        remote: true
+    },
+    {
+        name: "Suresh Patel",
+        age: 40,
+        isActive: true,
+        salary: 68000.75,
+        skills: ["Java", "Spring Boot", "SQL"],
+        contact: { email: "suresh@example.com", phone: "9988776655" },
+        joinedDate: new Date("2022-11-25"),
+        managerAssigned: null,
+        department: "IT",
+        contractEmployee: false
+    },
+    {
+        name: "Meera Das",
+        age: 26,
+        isActive: true,
+        salary: 39000,
+        skills: ["UI/UX", "Figma"],
+        contact: { email: "meera@example.com", phone: "9001122334" },
+        joinedDate: new Date("2024-01-15"),
+        managerAssigned: "Anita Sharma",
+        shiftTiming: "Morning",
+        performanceScore: 4.7
+    }
+])
+{
+  acknowledged: true,
+  insertedIds: {
+    '0': ObjectId('69356b9aab2a140b7119e21d'),
+    '1': ObjectId('69356b9aab2a140b7119e21e'),
+    '2': ObjectId('69356b9aab2a140b7119e21f')
+  }
+}
+db.Employees.find()
+{
+  _id: ObjectId('69356b88ab2a140b7119e21c'),
+  name: 'Ravi Kumar',
+  age: 28,
+  isActive: true,
+  salary: 45000.5,
+  skills: [
+    'JavaScript',
+    'Node.js',
+    'MongoDB'
+  ],
+  contact: {
+    email: 'ravi@example.com',
+    phone: '9876543210'
+  },
+  joinedDate: 2025-12-07T11:56:56.721Z,
+  managerAssigned: null
+}
+{
+  _id: ObjectId('69356b9aab2a140b7119e21d'),
+  name: 'Anita Sharma',
+  age: 32,
+  isActive: false,
+  salary: 52000,
+  skills: [
+    'Python',
+    'Django'
+  ],
+  contact: {
+    email: 'anita@example.com',
+    phone: '9123456780'
+  },
+  joinedDate: 2023-04-10T00:00:00.000Z,
+  managerAssigned: 'Ravi Kumar',
+  projects: 5,
+  remote: true
+}
+{
+  _id: ObjectId('69356b9aab2a140b7119e21e'),
+  name: 'Suresh Patel',
+  age: 40,
+  isActive: true,
+  salary: 68000.75,
+  skills: [
+    'Java',
+    'Spring Boot',
+    'SQL'
+  ],
+  contact: {
+    email: 'suresh@example.com',
+    phone: '9988776655'
+  },
+  joinedDate: 2022-11-25T00:00:00.000Z,
+  managerAssigned: null,
+  department: 'IT',
+  contractEmployee: false
+}
+{
+  _id: ObjectId('69356b9aab2a140b7119e21f'),
+  name: 'Meera Das',
+  age: 26,
+  isActive: true,
+  salary: 39000,
+  skills: [
+    'UI/UX',
+    'Figma'
+  ],
+  contact: {
+    email: 'meera@example.com',
+    phone: '9001122334'
+  },
+  joinedDate: 2024-01-15T00:00:00.000Z,
+  managerAssigned: 'Anita Sharma',
+  shiftTiming: 'Morning',
+  performanceScore: 4.7
+}
+CompanyDB
+
+
