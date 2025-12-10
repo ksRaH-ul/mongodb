@@ -1,0 +1,234 @@
+use ElectronicStore
+switched to db ElectronicStore
+db.Products.insertMany([
+    { productName: "Galaxy S21", category: "Smartphones", price: 799.99, stock: 10, discountAvailable: true },
+    { productName: "iPhone 13", category: "Smartphones", price: 999.99, stock: 8, discountAvailable: false },
+    { productName: "Dell XPS 13", category: "Laptops", price: 1299.99, stock: 6, discountAvailable: true },
+    { productName: "HP Spectre x360", category: "Laptops", price: 1499.99, stock: 3, discountAvailable: false },
+    { productName: "Sony Headphones", category: "Accessories", price: 199.99, stock: 15, discountAvailable: true },
+    { productName: "Logitech Mouse", category: "Accessories", price: 49.99, stock: 20, discountAvailable: true },
+    { productName: "MacBook Air", category: "Laptops", price: 999.99, stock: 7, discountAvailable: true },
+    { productName: "Samsung Tablet", category: "Tablets", price: 299.99, stock: 12, discountAvailable: false },
+    { productName: "Smart Watch", category: "Wearables", price: 249.99, stock: 5, discountAvailable: true },
+    { productName: "Gaming Monitor", category: "Monitors", price: 399.99, stock: 4, discountAvailable: false }
+]);
+{
+  acknowledged: true,
+  insertedIds: {
+    '0': ObjectId('69391299e15d68ca6015ca23'),
+    '1': ObjectId('69391299e15d68ca6015ca24'),
+    '2': ObjectId('69391299e15d68ca6015ca25'),
+    '3': ObjectId('69391299e15d68ca6015ca26'),
+    '4': ObjectId('69391299e15d68ca6015ca27'),
+    '5': ObjectId('69391299e15d68ca6015ca28'),
+    '6': ObjectId('69391299e15d68ca6015ca29'),
+    '7': ObjectId('69391299e15d68ca6015ca2a'),
+    '8': ObjectId('69391299e15d68ca6015ca2b'),
+    '9': ObjectId('69391299e15d68ca6015ca2c')
+  }
+}
+db.Products.find({price:{$lt:1000}})
+{
+  _id: ObjectId('69391299e15d68ca6015ca23'),
+  productName: 'Galaxy S21',
+  category: 'Smartphones',
+  price: 799.99,
+  stock: 10,
+  discountAvailable: true
+}
+{
+  _id: ObjectId('69391299e15d68ca6015ca24'),
+  productName: 'iPhone 13',
+  category: 'Smartphones',
+  price: 999.99,
+  stock: 8,
+  discountAvailable: false
+}
+{
+  _id: ObjectId('69391299e15d68ca6015ca27'),
+  productName: 'Sony Headphones',
+  category: 'Accessories',
+  price: 199.99,
+  stock: 15,
+  discountAvailable: true
+}
+{
+  _id: ObjectId('69391299e15d68ca6015ca28'),
+  productName: 'Logitech Mouse',
+  category: 'Accessories',
+  price: 49.99,
+  stock: 20,
+  discountAvailable: true
+}
+{
+  _id: ObjectId('69391299e15d68ca6015ca29'),
+  productName: 'MacBook Air',
+  category: 'Laptops',
+  price: 999.99,
+  stock: 7,
+  discountAvailable: true
+}
+{
+  _id: ObjectId('69391299e15d68ca6015ca2a'),
+  productName: 'Samsung Tablet',
+  category: 'Tablets',
+  price: 299.99,
+  stock: 12,
+  discountAvailable: false
+}
+{
+  _id: ObjectId('69391299e15d68ca6015ca2b'),
+  productName: 'Smart Watch',
+  category: 'Wearables',
+  price: 249.99,
+  stock: 5,
+  discountAvailable: true
+}
+{
+  _id: ObjectId('69391299e15d68ca6015ca2c'),
+  productName: 'Gaming Monitor',
+  category: 'Monitors',
+  price: 399.99,
+  stock: 4,
+  discountAvailable: false
+}
+db.Products.findOne({category:"Smartphones"})
+{
+  _id: ObjectId('69391299e15d68ca6015ca23'),
+  productName: 'Galaxy S21',
+  category: 'Smartphones',
+  price: 799.99,
+  stock: 10,
+  discountAvailable: true
+}
+db.Products.find({category:"Laptops",stock:{$gte:5}})
+{
+  _id: ObjectId('69391299e15d68ca6015ca25'),
+  productName: 'Dell XPS 13',
+  category: 'Laptops',
+  price: 1299.99,
+  stock: 6,
+  discountAvailable: true
+}
+{
+  _id: ObjectId('69391299e15d68ca6015ca29'),
+  productName: 'MacBook Air',
+  category: 'Laptops',
+  price: 999.99,
+  stock: 7,
+  discountAvailable: true
+}
+db.Products.find({$or:[{price:{$lt:300},discountAvailable:true}]})
+{
+  _id: ObjectId('69391299e15d68ca6015ca27'),
+  productName: 'Sony Headphones',
+  category: 'Accessories',
+  price: 199.99,
+  stock: 15,
+  discountAvailable: true
+}
+{
+  _id: ObjectId('69391299e15d68ca6015ca28'),
+  productName: 'Logitech Mouse',
+  category: 'Accessories',
+  price: 49.99,
+  stock: 20,
+  discountAvailable: true
+}
+{
+  _id: ObjectId('69391299e15d68ca6015ca2b'),
+  productName: 'Smart Watch',
+  category: 'Wearables',
+  price: 249.99,
+  stock: 5,
+  discountAvailable: true
+}
+db.Products.find({price:{$ne:1500})
+SyntaxError: Unexpected token, expected "," (1:34)
+
+> 1 | db.Products.find({price:{$ne:1500})
+    |                                   ^
+db.Products.find({price:{$ne:1500}})
+{
+  _id: ObjectId('69391299e15d68ca6015ca23'),
+  productName: 'Galaxy S21',
+  category: 'Smartphones',
+  price: 799.99,
+  stock: 10,
+  discountAvailable: true
+}
+{
+  _id: ObjectId('69391299e15d68ca6015ca24'),
+  productName: 'iPhone 13',
+  category: 'Smartphones',
+  price: 999.99,
+  stock: 8,
+  discountAvailable: false
+}
+{
+  _id: ObjectId('69391299e15d68ca6015ca25'),
+  productName: 'Dell XPS 13',
+  category: 'Laptops',
+  price: 1299.99,
+  stock: 6,
+  discountAvailable: true
+}
+{
+  _id: ObjectId('69391299e15d68ca6015ca26'),
+  productName: 'HP Spectre x360',
+  category: 'Laptops',
+  price: 1499.99,
+  stock: 3,
+  discountAvailable: false
+}
+{
+  _id: ObjectId('69391299e15d68ca6015ca27'),
+  productName: 'Sony Headphones',
+  category: 'Accessories',
+  price: 199.99,
+  stock: 15,
+  discountAvailable: true
+}
+{
+  _id: ObjectId('69391299e15d68ca6015ca28'),
+  productName: 'Logitech Mouse',
+  category: 'Accessories',
+  price: 49.99,
+  stock: 20,
+  discountAvailable: true
+}
+{
+  _id: ObjectId('69391299e15d68ca6015ca29'),
+  productName: 'MacBook Air',
+  category: 'Laptops',
+  price: 999.99,
+  stock: 7,
+  discountAvailable: true
+}
+{
+  _id: ObjectId('69391299e15d68ca6015ca2a'),
+  productName: 'Samsung Tablet',
+  category: 'Tablets',
+  price: 299.99,
+  stock: 12,
+  discountAvailable: false
+}
+{
+  _id: ObjectId('69391299e15d68ca6015ca2b'),
+  productName: 'Smart Watch',
+  category: 'Wearables',
+  price: 249.99,
+  stock: 5,
+  discountAvailable: true
+}
+{
+  _id: ObjectId('69391299e15d68ca6015ca2c'),
+  productName: 'Gaming Monitor',
+  category: 'Monitors',
+  price: 399.99,
+  stock: 4,
+  discountAvailable: false
+}
+ElectronicStore
+
+
