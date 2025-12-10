@@ -1,0 +1,200 @@
+use OnlineClothingStore
+switched to db OnlineClothingStore
+db.Clothes.insertMany([
+    { name: "Denim Jeans", category: "Pants", price: 599.99, stock: 20, discount: true },
+    { name: "Cotton T-Shirt", category: "Shirt", price: 199.99, stock: 15, discount: false },
+    { name: "Leather Jacket", category: "Jacket", price: 999.99, stock: 5, discount: true },
+    { name: "Formal Shirt", category: "Shirt", price: 349.99, stock: 12, discount: true },
+    { name: "Cargo Pants", category: "Pants", price: 499.99, stock: 8, discount: false },
+    { name: "Wool Sweater", category: "Sweater", price: 699.99, stock: 10, discount: true },
+    { name: "Casual Shorts", category: "Shorts", price: 249.99, stock: 25, discount: true },
+    { name: "Silk Scarf", category: "Accessories", price: 149.99, stock: 0, discount: false },
+    { name: "Hooded Sweatshirt", category: "Sweater", price: 399.99, stock: 18, discount: true },
+    { name: "Chinos", category: "Pants", price: 299.99, stock: 11, discount: false }
+]);
+{
+  acknowledged: true,
+  insertedIds: {
+    '0': ObjectId('6939576ef3d690b8f5d487c3'),
+    '1': ObjectId('6939576ef3d690b8f5d487c4'),
+    '2': ObjectId('6939576ef3d690b8f5d487c5'),
+    '3': ObjectId('6939576ef3d690b8f5d487c6'),
+    '4': ObjectId('6939576ef3d690b8f5d487c7'),
+    '5': ObjectId('6939576ef3d690b8f5d487c8'),
+    '6': ObjectId('6939576ef3d690b8f5d487c9'),
+    '7': ObjectId('6939576ef3d690b8f5d487ca'),
+    '8': ObjectId('6939576ef3d690b8f5d487cb'),
+    '9': ObjectId('6939576ef3d690b8f5d487cc')
+  }
+}
+db.Clothes.find({price:{$gt:500}})
+{
+  _id: ObjectId('6939576ef3d690b8f5d487c3'),
+  name: 'Denim Jeans',
+  category: 'Pants',
+  price: 599.99,
+  stock: 20,
+  discount: true
+}
+{
+  _id: ObjectId('6939576ef3d690b8f5d487c5'),
+  name: 'Leather Jacket',
+  category: 'Jacket',
+  price: 999.99,
+  stock: 5,
+  discount: true
+}
+{
+  _id: ObjectId('6939576ef3d690b8f5d487c8'),
+  name: 'Wool Sweater',
+  category: 'Sweater',
+  price: 699.99,
+  stock: 10,
+  discount: true
+}
+db.Clothes.findOne(category:"Shirt")
+SyntaxError: Unexpected token, expected "," (1:27)
+
+> 1 | db.Clothes.findOne(category:"Shirt")
+    |                            ^
+db.Clothes.findOne({category:"Shirt"})
+{
+  _id: ObjectId('6939576ef3d690b8f5d487c4'),
+  name: 'Cotton T-Shirt',
+  category: 'Shirt',
+  price: 199.99,
+  stock: 15,
+  discount: false
+}
+db.Clothes.find({$and:[{price:{$lte:500}},{stock:{$gt:10}}]})
+{
+  _id: ObjectId('6939576ef3d690b8f5d487c4'),
+  name: 'Cotton T-Shirt',
+  category: 'Shirt',
+  price: 199.99,
+  stock: 15,
+  discount: false
+}
+{
+  _id: ObjectId('6939576ef3d690b8f5d487c6'),
+  name: 'Formal Shirt',
+  category: 'Shirt',
+  price: 349.99,
+  stock: 12,
+  discount: true
+}
+{
+  _id: ObjectId('6939576ef3d690b8f5d487c9'),
+  name: 'Casual Shorts',
+  category: 'Shorts',
+  price: 249.99,
+  stock: 25,
+  discount: true
+}
+{
+  _id: ObjectId('6939576ef3d690b8f5d487cb'),
+  name: 'Hooded Sweatshirt',
+  category: 'Sweater',
+  price: 399.99,
+  stock: 18,
+  discount: true
+}
+{
+  _id: ObjectId('6939576ef3d690b8f5d487cc'),
+  name: 'Chinos',
+  category: 'Pants',
+  price: 299.99,
+  stock: 11,
+  discount: false
+}
+db.Clothes.find({$or:[{price:{$lt:200}},{discount:true}]})
+{
+  _id: ObjectId('6939576ef3d690b8f5d487c3'),
+  name: 'Denim Jeans',
+  category: 'Pants',
+  price: 599.99,
+  stock: 20,
+  discount: true
+}
+{
+  _id: ObjectId('6939576ef3d690b8f5d487c4'),
+  name: 'Cotton T-Shirt',
+  category: 'Shirt',
+  price: 199.99,
+  stock: 15,
+  discount: false
+}
+{
+  _id: ObjectId('6939576ef3d690b8f5d487c5'),
+  name: 'Leather Jacket',
+  category: 'Jacket',
+  price: 999.99,
+  stock: 5,
+  discount: true
+}
+{
+  _id: ObjectId('6939576ef3d690b8f5d487c6'),
+  name: 'Formal Shirt',
+  category: 'Shirt',
+  price: 349.99,
+  stock: 12,
+  discount: true
+}
+{
+  _id: ObjectId('6939576ef3d690b8f5d487c8'),
+  name: 'Wool Sweater',
+  category: 'Sweater',
+  price: 699.99,
+  stock: 10,
+  discount: true
+}
+{
+  _id: ObjectId('6939576ef3d690b8f5d487c9'),
+  name: 'Casual Shorts',
+  category: 'Shorts',
+  price: 249.99,
+  stock: 25,
+  discount: true
+}
+{
+  _id: ObjectId('6939576ef3d690b8f5d487ca'),
+  name: 'Silk Scarf',
+  category: 'Accessories',
+  price: 149.99,
+  stock: 0,
+  discount: false
+}
+{
+  _id: ObjectId('6939576ef3d690b8f5d487cb'),
+  name: 'Hooded Sweatshirt',
+  category: 'Sweater',
+  price: 399.99,
+  stock: 18,
+  discount: true
+}
+db.Clothes.updateOne({name:"Denim Jeans"},{$set:[{stock:50}]})
+MongoServerError: Modifiers operate on fields but we found type array instead. For example: {$mod: {<field>: ...}} not {$set: [ { stock: 50 } ]}
+db.Clothes.updateOne({name:"Denim Jeans"},{$set:{stock:50}})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+db.Clothes.updateOne({name:"Leather Jacket"},{$set:{Price:1200}})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+db.Clothes.deleteOne({stock:0})
+{
+  acknowledged: true,
+  deletedCount: 1
+}
+OnlineClothingStore
+
+

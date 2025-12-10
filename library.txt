@@ -1,0 +1,151 @@
+use library
+switched to db library
+db.Books.insertMany([
+    { title: "Pride and Prejudice", author: "Jane Austen", year: 1813, copies: 8, available: true },
+    { title: "Data Structures", author: "John Smith", year: 2015, copies: 3, available: true },
+    { title: "Modern JavaScript", author: "Emily Brown", year: 2020, copies: 4, available: false },
+    { title: "The Great Gatsby", author: "F. Scott Fitzgerald", year: 1925, copies: 6, available: true },
+    { title: "To Kill a Mockingbird", author: "Harper Lee", year: 1960, copies: 10, available: true },
+    { title: "A Brief History of Time", author: "Stephen Hawking", year: 1988, copies: 2, available: false },
+    { title: "The C Programming Language", author: "Unknown", year: 1978, copies: 5, available: true },
+    { title: "Sapiens", author: "Yuval Noah Harari", year: 2014, copies: 7, available: true },
+    { title: "The Alchemist", author: "Paulo Coelho", year: 1988, copies: 1, available: false },
+    { title: "Dune", author: "Frank Herbert", year: 1965, copies: 4, available: true }
+]);
+{
+  acknowledged: true,
+  insertedIds: {
+    '0': ObjectId('69395b240fd11d5ebb8fc1df'),
+    '1': ObjectId('69395b240fd11d5ebb8fc1e0'),
+    '2': ObjectId('69395b240fd11d5ebb8fc1e1'),
+    '3': ObjectId('69395b240fd11d5ebb8fc1e2'),
+    '4': ObjectId('69395b240fd11d5ebb8fc1e3'),
+    '5': ObjectId('69395b240fd11d5ebb8fc1e4'),
+    '6': ObjectId('69395b240fd11d5ebb8fc1e5'),
+    '7': ObjectId('69395b240fd11d5ebb8fc1e6'),
+    '8': ObjectId('69395b240fd11d5ebb8fc1e7'),
+    '9': ObjectId('69395b240fd11d5ebb8fc1e8')
+  }
+}
+db.Books.find({year:{$gt:2010}})
+{
+  _id: ObjectId('69395b240fd11d5ebb8fc1e0'),
+  title: 'Data Structures',
+  author: 'John Smith',
+  year: 2015,
+  copies: 3,
+  available: true
+}
+{
+  _id: ObjectId('69395b240fd11d5ebb8fc1e1'),
+  title: 'Modern JavaScript',
+  author: 'Emily Brown',
+  year: 2020,
+  copies: 4,
+  available: false
+}
+{
+  _id: ObjectId('69395b240fd11d5ebb8fc1e6'),
+  title: 'Sapiens',
+  author: 'Yuval Noah Harari',
+  year: 2014,
+  copies: 7,
+  available: true
+}
+db.Books.findOne({author:"Jane Austin"})
+null
+db.Books.findOne({author:"Jane Austen"})
+{
+  _id: ObjectId('69395b240fd11d5ebb8fc1df'),
+  title: 'Pride and Prejudice',
+  author: 'Jane Austen',
+  year: 1813,
+  copies: 8,
+  available: true
+}
+db.Books.find({$and:[{copies:{$gt:5}},{year:{$lte:2000}]})
+SyntaxError: Unexpected token, expected "," (1:55)
+
+> 1 | db.Books.find({$and:[{copies:{$gt:5}},{year:{$lte:2000}]})
+    |                                                        ^
+db.Books.find({$and:[{copies:{$gt:5}},{year:{$lte:2000}}]})
+{
+  _id: ObjectId('69395b240fd11d5ebb8fc1df'),
+  title: 'Pride and Prejudice',
+  author: 'Jane Austen',
+  year: 1813,
+  copies: 8,
+  available: true
+}
+{
+  _id: ObjectId('69395b240fd11d5ebb8fc1e2'),
+  title: 'The Great Gatsby',
+  author: 'F. Scott Fitzgerald',
+  year: 1925,
+  copies: 6,
+  available: true
+}
+{
+  _id: ObjectId('69395b240fd11d5ebb8fc1e3'),
+  title: 'To Kill a Mockingbird',
+  author: 'Harper Lee',
+  year: 1960,
+  copies: 10,
+  available: true
+}
+db.Books.find({$or:[{copies:{$lt:3}},{available:{$not:true}}]})
+MongoServerError[BadValue]: $not argument must be a regex or an object
+db.Books.find({$or:[{copies:{$lt:3}},{available:false}]})
+{
+  _id: ObjectId('69395b240fd11d5ebb8fc1e1'),
+  title: 'Modern JavaScript',
+  author: 'Emily Brown',
+  year: 2020,
+  copies: 4,
+  available: false
+}
+{
+  _id: ObjectId('69395b240fd11d5ebb8fc1e4'),
+  title: 'A Brief History of Time',
+  author: 'Stephen Hawking',
+  year: 1988,
+  copies: 2,
+  available: false
+}
+{
+  _id: ObjectId('69395b240fd11d5ebb8fc1e7'),
+  title: 'The Alchemist',
+  author: 'Paulo Coelho',
+  year: 1988,
+  copies: 1,
+  available: false
+}
+db.Books.updateOne({title:"Data Structures"},{$set:{copies:10}}})
+SyntaxError: Unexpected token, expected "," (1:63)
+
+> 1 | db.Books.updateOne({title:"Data Structures"},{$set:{copies:10}}})
+    |                                                                ^
+db.Books.updateOne({title:"Data Structures"},{$set:{copies:10}})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+db.Books.updateOne({title:"Modern JavaScript"},{$set:{available:true}})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+db.Books.deleteOne({author:"Unknown"})
+{
+  acknowledged: true,
+  deletedCount: 1
+}
+library
+
+
