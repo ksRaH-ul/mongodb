@@ -1,0 +1,125 @@
+use NewEmployee
+switched to db NewEmployee
+db.employees.insertMany([
+    { name: "Alice Johnson", department: "Engineering", salary: 75000, email: "alice.johnson@company.com" },
+    { name: "Bob Smith", department: "Marketing", salary: 65000, email: "bob.smith@company.com" },
+    { name: "Charlie Brown", department: "Engineering", salary: 80000, email: "charlie.brown@company.com" },
+    { name: "Diana Lee", department: "HR", salary: 60000, email: "diana.lee@company.com" },
+    { name: "Emma Davis", department: "Sales", salary: 70000, email: "emma.davis@company.com" },
+    { name: "Frank Wilson", department: "Engineering", salary: 82000, email: "frank.wilson@company.com" },
+    { name: "Grace Kim", department: "Marketing", salary: 68000, email: "grace.kim@company.com" },
+    { name: "Henry Chen", department: "HR", salary: 62000, email: "henry.chen@company.com" }
+]);
+{
+  acknowledged: true,
+  insertedIds: {
+    '0': ObjectId('693aa8f2dc4c54895db53706'),
+    '1': ObjectId('693aa8f2dc4c54895db53707'),
+    '2': ObjectId('693aa8f2dc4c54895db53708'),
+    '3': ObjectId('693aa8f2dc4c54895db53709'),
+    '4': ObjectId('693aa8f2dc4c54895db5370a'),
+    '5': ObjectId('693aa8f2dc4c54895db5370b'),
+    '6': ObjectId('693aa8f2dc4c54895db5370c'),
+    '7': ObjectId('693aa8f2dc4c54895db5370d')
+  }
+}
+ 
+db.employees.find({},{_id:0,salary:0,email:0})
+{
+  name: 'Alice Johnson',
+  department: 'Engineering'
+}
+{
+  name: 'Bob Smith',
+  department: 'Marketing'
+}
+{
+  name: 'Charlie Brown',
+  department: 'Engineering'
+}
+{
+  name: 'Diana Lee',
+  department: 'HR'
+}
+{
+  name: 'Emma Davis',
+  department: 'Sales'
+}
+{
+  name: 'Frank Wilson',
+  department: 'Engineering'
+}
+{
+  name: 'Grace Kim',
+  department: 'Marketing'
+}
+{
+  name: 'Henry Chen',
+  department: 'HR'
+}
+db.employees.find().limit(4)
+{
+  _id: ObjectId('693aa8f2dc4c54895db53706'),
+  name: 'Alice Johnson',
+  department: 'Engineering',
+  salary: 75000,
+  email: 'alice.johnson@company.com'
+}
+{
+  _id: ObjectId('693aa8f2dc4c54895db53707'),
+  name: 'Bob Smith',
+  department: 'Marketing',
+  salary: 65000,
+  email: 'bob.smith@company.com'
+}
+{
+  _id: ObjectId('693aa8f2dc4c54895db53708'),
+  name: 'Charlie Brown',
+  department: 'Engineering',
+  salary: 80000,
+  email: 'charlie.brown@company.com'
+}
+{
+  _id: ObjectId('693aa8f2dc4c54895db53709'),
+  name: 'Diana Lee',
+  department: 'HR',
+  salary: 60000,
+  email: 'diana.lee@company.com'
+}
+db.employees.find({},{_id:0,name:1,salary:1}).limit(5).skip(2)
+{
+  name: 'Charlie Brown',
+  salary: 80000
+}
+{
+  name: 'Diana Lee',
+  salary: 60000
+}
+{
+  name: 'Emma Davis',
+  salary: 70000
+}
+{
+  name: 'Frank Wilson',
+  salary: 82000
+}
+{
+  name: 'Grace Kim',
+  salary: 68000
+}
+db.employees.find({},{_id:0,name:1,email:1}).limit(7).skip(5)
+{
+  name: 'Frank Wilson',
+  email: 'frank.wilson@company.com'
+}
+{
+  name: 'Grace Kim',
+  email: 'grace.kim@company.com'
+}
+{
+  name: 'Henry Chen',
+  email: 'henry.chen@company.com'
+}
+NewEmployee
+
+
