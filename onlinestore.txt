@@ -1,0 +1,104 @@
+use onlinestore
+switched to db onlinestore
+db.orders.insertMany([
+    { 
+        orderId: "ORD001", 
+        customer: "Alice Johnson", 
+        items: [
+            { product: "Wireless Mouse", price: 29.99, quantity: 2 },
+            { product: "Bluetooth Headphones", price: 89.99, quantity: 1 }
+        ], 
+        orderDate: ISODate("2025-07-01T10:00:00Z"), 
+        status: "Delivered"
+    },
+    { 
+        orderId: "ORD002", 
+        customer: "Bob Smith", 
+        items: [
+            { product: "Wireless Mouse", price: 29.99, quantity: 3 },
+            { product: "Smart Watch", price: 199.99, quantity: 1 }
+        ], 
+        orderDate: ISODate("2025-07-02T12:30:00Z"), 
+        status: "Pending"
+    },
+    { 
+        orderId: "ORD003", 
+        customer: "Charlie Brown", 
+        items: [
+            { product: "Bluetooth Headphones", price: 89.99, quantity: 2 },
+            { product: "Tablet X", price: 299.99, quantity: 1 }
+        ], 
+        orderDate: ISODate("2025-07-03T15:45:00Z"), 
+        status: "Delivered"
+    },
+    { 
+        orderId: "ORD004", 
+        customer: "Diana Lee", 
+        items: [
+            { product: "Wireless Mouse", price: 29.99, quantity: 1 },
+            { product: "Smart Watch", price: 199.99, quantity: 2 }
+        ], 
+        orderDate: ISODate("2025-07-04T09:15:00Z"), 
+        status: "Shipped"
+    },
+    { 
+        orderId: "ORD005", 
+        customer: "Emma Davis", 
+        items: [
+            { product: "Tablet X", price: 299.99, quantity: 2 },
+            { product: "Bluetooth Headphones", price: 89.99, quantity: 3 }
+        ], 
+        orderDate: ISODate("2025-07-05T11:20:00Z"), 
+        status: "Delivered"
+    }
+]);
+{
+  acknowledged: true,
+  insertedIds: {
+    '0': ObjectId('694395ff891ed9c5cc1889af'),
+    '1': ObjectId('694395ff891ed9c5cc1889b0'),
+    '2': ObjectId('694395ff891ed9c5cc1889b1'),
+    '3': ObjectId('694395ff891ed9c5cc1889b2'),
+    '4': ObjectId('694395ff891ed9c5cc1889b3')
+  }
+}
+db.orders.aggregate([
+  {
+    $unwind: "$items"
+  },
+  {
+    $group: {
+      _id: "$items.product",
+      totalQuantity: { $sum: "$items.quantity" }
+    }
+  },
+  {
+    $sort: { totalQuantity: -1 }
+  },
+  {
+    $project: {
+      _id: 0,
+      product: "$_id",
+      totalQuantity: 1
+    }
+  }
+]);
+{
+  totalQuantity: 6,
+  product: 'Wireless Mouse'
+}
+{
+  totalQuantity: 6,
+  product: 'Bluetooth Headphones'
+}
+{
+  totalQuantity: 3,
+  product: 'Tablet X'
+}
+{
+  totalQuantity: 3,
+  product: 'Smart Watch'
+}
+onlinestore
+
+
