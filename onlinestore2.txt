@@ -1,0 +1,236 @@
+use onlinestore1
+switched to db onlinestore1
+db.sales.insertMany([
+    { product: "Dell XPS 13", category: "Laptops", price: 1299.99, quantity: 2, date: ISODate("2025-07-01T08:00:00Z") },
+    { product: "MacBook Air", category: "Laptops", price: 999.99, quantity: 3, date: ISODate("2025-07-02T10:30:00Z") },
+    { product: "Wireless Mouse", category: "Accessories", price: 29.99, quantity: 5, date: ISODate("2025-07-02T12:00:00Z") },
+    { product: "HP Spectre x360", category: "Laptops", price: 1499.99, quantity: 1, date: ISODate("2025-07-03T14:15:00Z") },
+    { product: "MacBook Air", category: "Laptops", price: 1099.99, quantity: 2, date: ISODate("2025-07-04T09:45:00Z") },
+    { product: "Smartphone Pro", category: "Smartphones", price: 999.99, quantity: 2, date: ISODate("2025-07-04T11:20:00Z") },
+    { product: "Dell XPS 13", category: "Laptops", price: 1249.99, quantity: 4, date: ISODate("2025-07-05T13:50:00Z") },
+    { product: "Bluetooth Headphones", category: "Accessories", price: 89.99, quantity: 3, date: ISODate("2025-07-05T15:30:00Z") },
+    { product: "MacBook Air", category: "Laptops", price: 1049.99, quantity: 1, date: ISODate("2025-07-06T10:00:00Z") },
+    { product: "HP Spectre x360", category: "Laptops", price: 1399.99, quantity: 2, date: ISODate("2025-07-07T11:00:00Z") }
+]);
+{
+  acknowledged: true,
+  insertedIds: {
+    '0': ObjectId('69439861db1c3e29f8c9c9ac'),
+    '1': ObjectId('69439861db1c3e29f8c9c9ad'),
+    '2': ObjectId('69439861db1c3e29f8c9c9ae'),
+    '3': ObjectId('69439861db1c3e29f8c9c9af'),
+    '4': ObjectId('69439861db1c3e29f8c9c9b0'),
+    '5': ObjectId('69439861db1c3e29f8c9c9b1'),
+    '6': ObjectId('69439861db1c3e29f8c9c9b2'),
+    '7': ObjectId('69439861db1c3e29f8c9c9b3'),
+    '8': ObjectId('69439861db1c3e29f8c9c9b4'),
+    '9': ObjectId('69439861db1c3e29f8c9c9b5')
+  }
+}
+db.sales.find(
+  { category: "Laptops" }
+);
+{
+  _id: ObjectId('69439861db1c3e29f8c9c9ac'),
+  product: 'Dell XPS 13',
+  category: 'Laptops',
+  price: 1299.99,
+  quantity: 2,
+  date: 2025-07-01T08:00:00.000Z
+}
+{
+  _id: ObjectId('69439861db1c3e29f8c9c9ad'),
+  product: 'MacBook Air',
+  category: 'Laptops',
+  price: 999.99,
+  quantity: 3,
+  date: 2025-07-02T10:30:00.000Z
+}
+{
+  _id: ObjectId('69439861db1c3e29f8c9c9af'),
+  product: 'HP Spectre x360',
+  category: 'Laptops',
+  price: 1499.99,
+  quantity: 1,
+  date: 2025-07-03T14:15:00.000Z
+}
+{
+  _id: ObjectId('69439861db1c3e29f8c9c9b0'),
+  product: 'MacBook Air',
+  category: 'Laptops',
+  price: 1099.99,
+  quantity: 2,
+  date: 2025-07-04T09:45:00.000Z
+}
+{
+  _id: ObjectId('69439861db1c3e29f8c9c9b2'),
+  product: 'Dell XPS 13',
+  category: 'Laptops',
+  price: 1249.99,
+  quantity: 4,
+  date: 2025-07-05T13:50:00.000Z
+}
+{
+  _id: ObjectId('69439861db1c3e29f8c9c9b4'),
+  product: 'MacBook Air',
+  category: 'Laptops',
+  price: 1049.99,
+  quantity: 1,
+  date: 2025-07-06T10:00:00.000Z
+}
+{
+  _id: ObjectId('69439861db1c3e29f8c9c9b5'),
+  product: 'HP Spectre x360',
+  category: 'Laptops',
+  price: 1399.99,
+  quantity: 2,
+  date: 2025-07-07T11:00:00.000Z
+}
+db.sales.aggregate([
+  { $match: { category: "Laptops" } },
+  {
+    $group: {
+      _id: "$product",
+      totalQuantity: { $sum: "$quantity" }
+    }
+  }
+]);
+{
+  _id: 'MacBook Air',
+  totalQuantity: 6
+}
+{
+  _id: 'Dell XPS 13',
+  totalQuantity: 6
+}
+{
+  _id: 'HP Spectre x360',
+  totalQuantity: 3
+}
+db.sales.aggregate([
+  { $match: { category: "Laptops" } },
+  {
+    $group: {
+      _id: "$product",
+      averagePrice: { $avg: "$price" }
+    }
+  }
+]);
+{
+  _id: 'HP Spectre x360',
+  averagePrice: 1449.99
+}
+{
+  _id: 'Dell XPS 13',
+  averagePrice: 1274.99
+}
+{
+  _id: 'MacBook Air',
+  averagePrice: 1049.99
+}
+db.sales.aggregate([
+  { $match: { category: "Laptops" } },
+  {
+    $group: {
+      _id: "$product",
+      totalQuantity: { $sum: "$quantity" },
+      averagePrice: { $avg: "$price" }
+    }
+  },
+  { $sort: { totalQuantity: -1 } }
+]);
+{
+  _id: 'MacBook Air',
+  totalQuantity: 6,
+  averagePrice: 1049.99
+}
+{
+  _id: 'Dell XPS 13',
+  totalQuantity: 6,
+  averagePrice: 1274.99
+}
+{
+  _id: 'HP Spectre x360',
+  totalQuantity: 3,
+  averagePrice: 1449.99
+}
+db.sales.aggregate([
+  { $match: { category: "Laptops" } },
+  {
+    $group: {
+      _id: "$product",
+      totalQuantity: { $sum: "$quantity" },
+      averagePrice: { $avg: "$price" },
+      totalRevenue: {
+        $sum: { $multiply: ["$price", "$quantity"] }
+      }
+    }
+  }
+]);
+{
+  _id: 'HP Spectre x360',
+  totalQuantity: 3,
+  averagePrice: 1449.99,
+  totalRevenue: 4299.97
+}
+{
+  _id: 'Dell XPS 13',
+  totalQuantity: 6,
+  averagePrice: 1274.99,
+  totalRevenue: 7599.9400000000005
+}
+{
+  _id: 'MacBook Air',
+  totalQuantity: 6,
+  averagePrice: 1049.99,
+  totalRevenue: 6249.9400000000005
+}
+db.sales.aggregate([
+  { $match: { category: "Laptops" } },
+  {
+    $group: {
+      _id: "$product",
+      totalQuantity: { $sum: "$quantity" },
+      averagePrice: { $avg: "$price" },
+      totalRevenue: {
+        $sum: { $multiply: ["$price", "$quantity"] }
+      }
+    }
+  },
+  { $sort: { totalQuantity: -1 } },
+  {
+    $project: {
+      _id: 0,
+      product: "$_id",
+      totalQuantity: 1,
+      averagePrice: { $round: ["$averagePrice", 2] },
+      totalRevenue: { $round: ["$totalRevenue", 2] }
+    }
+  },
+  { $out: "laptop_sales_summary2" }
+]);
+db.laptop_sales_summary2.find()
+{
+  _id: ObjectId('694398d8130735a8fad7aa6b'),
+  totalQuantity: 6,
+  product: 'Dell XPS 13',
+  averagePrice: 1274.99,
+  totalRevenue: 7599.94
+}
+{
+  _id: ObjectId('694398d8130735a8fad7aa6c'),
+  totalQuantity: 6,
+  product: 'MacBook Air',
+  averagePrice: 1049.99,
+  totalRevenue: 6249.94
+}
+{
+  _id: ObjectId('694398d8130735a8fad7aa6d'),
+  totalQuantity: 3,
+  product: 'HP Spectre x360',
+  averagePrice: 1449.99,
+  totalRevenue: 4299.97
+}
+onlinestore1
+
+
