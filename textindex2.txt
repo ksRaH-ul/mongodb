@@ -1,0 +1,75 @@
+use textindex
+already on db textindex
+var x = new Timestamp()
+x
+Timestamp({ t: 0, i: 0 })
+db.tickets.insertOne({subject:"no range",description:" cant see range in phone",createdat:x})
+{
+  acknowledged: true,
+  insertedId: ObjectId('69492d6b2f4fef7100074a30')
+}
+db.tickets.insertOne({subject:"error",description:" app not opening",createdat:x})
+{
+  acknowledged: true,
+  insertedId: ObjectId('69492d8a2f4fef7100074a31')
+}
+db.tickets.insertOne({subject:"payment error",description:" unable to pay. payment error showing.",createdat:x})
+{
+  acknowledged: true,
+  insertedId: ObjectId('69492daf2f4fef7100074a32')
+}
+db.tickets.createIndex({subject:"text",description;"text"})
+SyntaxError: Unexpected token, expected "," (1:50)
+
+> 1 | db.tickets.createIndex({subject:"text",description;"text"})
+    |                                                   ^
+db.tickets.createIndex({subject:"text",description:"text"})
+subject_text_description_text
+db.tickets.getIndexes()
+[
+  { v: 2, key: { _id: 1 }, name: '_id_' },
+  {
+    v: 2,
+    key: { _fts: 'text', _ftsx: 1 },
+    name: 'subject_text_description_text',
+    weights: { description: 1, subject: 1 },
+    default_language: 'english',
+    language_override: 'language',
+    textIndexVersion: 3
+  }
+]
+db.tickets.find({$text:{$search:"error"}})
+{
+  _id: ObjectId('69492daf2f4fef7100074a32'),
+  subject: 'payment error',
+  description: ' unable to pay. payment error showing.',
+  createdat: Timestamp({ t: 1766403503, i: 1 })
+}
+{
+  _id: ObjectId('69492d8a2f4fef7100074a31'),
+  subject: 'error',
+  description: ' app not opening',
+  createdat: Timestamp({ t: 1766403466, i: 1 })
+}
+db.tickets.find({$text:{$search:" payment error"}})
+{
+  _id: ObjectId('69492daf2f4fef7100074a32'),
+  subject: 'payment error',
+  description: ' unable to pay. payment error showing.',
+  createdat: Timestamp({ t: 1766403503, i: 1 })
+}
+{
+  _id: ObjectId('69492d8a2f4fef7100074a31'),
+  subject: 'error',
+  description: ' app not opening',
+  createdat: Timestamp({ t: 1766403466, i: 1 })
+}
+db.tickets.dropIndexes()
+{
+  nIndexesWas: 2,
+  msg: 'non-_id indexes dropped for collection',
+  ok: 1
+}
+textindex
+
+
